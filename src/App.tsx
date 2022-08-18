@@ -1,5 +1,6 @@
+import React, { useState } from 'react'
 import { NavBar } from './components/NavBar/NavBar'
-import { FirstPage } from './components/Main/FirstPage/FirstPage'
+
 import { SecondPage } from 'components/Main/SecondPage/SecondPage'
 import {
   BrowserRouter as Router,
@@ -10,8 +11,18 @@ import {
 
 import css from './App.module.css'
 import './App.module.css'
+import { FirstPage } from 'components/Main/FirstPage/FirstPage'
 
 function App() {
+  const [users, setUsers] = useState({})
+  console.log(users)
+
+  const getUsers = () => {
+    fetch('https://jsonplaceholder.typicode.com/users/')
+      .then((response) => response.json())
+      .then((json) => setUsers(json))
+  }
+
   return (
     <Router>
       <div>
@@ -19,7 +30,7 @@ function App() {
         <div>
           <div className={css.navbar}>
             <NavLink
-              to="/firstpage"
+              to="/"
               className={css.navlink}
               style={({ isActive }) =>
                 isActive
@@ -32,6 +43,7 @@ function App() {
               First Page
             </NavLink>
             <NavLink
+              onClick={getUsers}
               to="/secondpage"
               className={css.navlink}
               style={({ isActive }) =>
