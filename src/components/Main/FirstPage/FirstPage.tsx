@@ -8,8 +8,6 @@ export const FirstPage = () => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
       </p>
       <Title />
-      <Title />
-      <Title />
     </>
   )
 }

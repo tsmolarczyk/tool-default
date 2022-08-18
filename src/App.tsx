@@ -30,7 +30,7 @@ function App() {
         <div>
           <div className={css.navbar}>
             <NavLink
-              to="/"
+              to="/firstpage"
               className={css.navlink}
               style={({ isActive }) =>
                 isActive
