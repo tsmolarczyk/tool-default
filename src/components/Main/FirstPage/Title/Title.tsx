@@ -20,7 +20,7 @@ export const Title = () => {
 
   const titlesToDisplay = useMemo(() => {
     if (titles) {
-      return titles.map((title: any) => title.title)
+      return titles.map((title: any) => <h1>{title.title}</h1>)
     }
     return <h1>Loading...</h1>
   }, [titles])

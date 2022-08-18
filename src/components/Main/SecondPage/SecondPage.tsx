@@ -7,11 +7,5 @@ import css from './SecondPage.module.css'
 // })
 
 export const SecondPage = () => {
-  return (
-    <>
-      <p className={css.para}>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      </p>
-    </>
-  )
+  return <button>open</button>
 }
