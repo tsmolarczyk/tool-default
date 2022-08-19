@@ -5,11 +5,10 @@ import { useContext } from 'react'
 
 export const FirstPage = () => {
   const { users } = useContext(Context)
-
   return (
     <>
-      {users}
-      <h1 className={css.para}>Titles:</h1>
+      <h1 className={css.para}>Tasdasditles:</h1>
+      <h1>{users}</h1>
       <Title />
     </>
   )

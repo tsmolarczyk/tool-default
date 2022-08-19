@@ -73,7 +73,7 @@ export const ThirdPage: React.FC = () => {
           <button
             key={index}
             style={{ marginLeft: '10px', color: 'blue', cursor: 'pointer' }}
-            onClick={(e) => addToContext(e)}
+            onClick={() => addToContext(p)}
           >
             add to context
           </button>

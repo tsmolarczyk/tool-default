@@ -7,6 +7,7 @@ export const ContextProvider: React.FC<any> = ({ children }) => {
 
   const addUser = async (value: any) => {
     setUsers(value)
+    console.log(value)
   }
 
   return (
