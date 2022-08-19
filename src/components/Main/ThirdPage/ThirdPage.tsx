@@ -1,49 +1,103 @@
-import { useState, useMemo, useEffect } from 'react'
+import { Context } from 'Providers/ContextProvider'
+import { useState, useEffect, useCallback, useContext } from 'react'
 
-export const ThirdPage = () => {
-  const [persons, setPersons] = useState<any>()
+interface Person {
+  id: number
+  name: string
+}
 
-  let people = [
+export const ThirdPage: React.FC = () => {
+  const { addUser } = useContext(Context)
+
+  const [persons, setPersons] = useState<any>([
     {
+      id: '0',
       name: 'Marek',
-      surname: 'Nowak',
     },
     {
+      id: '1',
       name: 'Karol',
-      surname: 'Hill',
     },
-  ]
+    {
+      id: '2',
+      name: 'Tom',
+    },
+  ])
 
-  const getPersons = () => {
-    setPersons(people)
-    console.log(persons)
+  const [formName, setFormName] = useState<Person>()
+
+  const deletePerson = (index: any, e: any) => {
+    setPersons(persons.filter((p: any, i: any) => i !== index))
   }
 
-  useEffect(() => {
-    getPersons()
+  const addToContext = (value: any) => {
+    addUser(value.name)
+  }
+
+  const handleSetName = useCallback((e: any) => {
+    const someone = {
+      id: Math.random(),
+      name: e.target.value,
+    }
+
+    setFormName(someone)
   }, [])
 
-  const personsToDisplay = useMemo(() => {
-    if (persons) {
-      return persons.map((p: any) => (
-        <div style={{ display: 'flex', marginTop: '10px' }}>
-          <p style={{ fontSize: '20px' }}>{p.name}</p>
-          <button
-            style={{ marginLeft: '10px', color: 'red', cursor: 'pointer' }}
-            // onClick={deletePerson()}
-          >
-            delete
-          </button>
-        </div>
-      ))
-    }
-    return <h3>Musisz troche poczekac</h3>
+  const addPerson = useCallback(
+    (e: any) => {
+      e.preventDefault()
+
+      console.log(formName)
+      console.log(persons)
+      setPersons([...persons, formName])
+    },
+    [formName, persons]
+  )
+  useEffect(() => {
+    console.log(persons)
   }, [persons])
 
   return (
     <div>
-      <h1 style={{ fontSize: '40px', fontWeight: 'bold' }}>NAMES</h1>
-      {personsToDisplay}
+      <h1 style={{ fontSize: '40px', fontWeight: 'bold' }}>NAMES:</h1>
+      {persons.map((p: any, index: any) => (
+        <div style={{ display: 'flex', marginTop: '10px' }}>
+          <p style={{ fontSize: '20px' }}>{p.name}</p>
+          <button
+            key={index}
+            style={{ marginLeft: '10px', color: 'red', cursor: 'pointer' }}
+            onClick={(e) => deletePerson(index, e)}
+          >
+            delete
+          </button>
+          <button
+            key={index}
+            style={{ marginLeft: '10px', color: 'blue', cursor: 'pointer' }}
+            onClick={(e) => addToContext(e)}
+          >
+            add to context
+          </button>
+        </div>
+      ))}
+      <div style={{ display: 'flex', flexDirection: 'column', color: 'green' }}>
+        <h1>Add new person</h1>
+        <form style={{ display: 'flex', flexDirection: 'column' }}>
+          <label>
+            <input name="name" placeholder="name" onChange={handleSetName} />
+          </label>
+          <button
+            style={{
+              display: 'flex',
+              width: '145px',
+              textAlign: 'right',
+              cursor: 'pointer',
+            }}
+            onClick={addPerson}
+          >
+            Add
+          </button>
+        </form>
+      </div>
     </div>
   )
 }
