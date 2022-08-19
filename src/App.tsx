@@ -1,16 +1,17 @@
-import { NavBar } from "./components/NavBar/NavBar";
+import { NavBar } from './components/NavBar/NavBar'
 
-import { SecondPage } from "components/Main/SecondPage/SecondPage";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   NavLink,
-} from "react-router-dom";
+} from 'react-router-dom'
 
-import css from "./App.module.css";
-import "./App.module.css";
-import { FirstPage } from "components/Main/FirstPage/FirstPage";
+import css from './App.module.css'
+import './App.module.css'
+import { FirstPage } from 'components/Main/FirstPage/FirstPage'
+import { SecondPage } from 'components/Main/SecondPage/SecondPage'
+import { ThirdPage } from 'components/Main/ThirdPage/ThirdPage'
 
 function App() {
   return (
@@ -20,43 +21,57 @@ function App() {
         <div>
           <div className={css.navbar}>
             <NavLink
-              to='/firstpage'
+              to="/firstpage"
               className={css.navlink}
               style={({ isActive }) =>
                 isActive
                   ? {
-                      borderBottom: "3px red solid",
+                      borderBottom: '3px red solid',
                     }
-                  : { color: "#545e6f", background: "#f0f0f0" }
+                  : { color: '#545e6f', background: '#f0f0f0' }
               }
             >
               First Page
             </NavLink>
             <NavLink
-              to='/secondpage'
+              to="/secondpage"
               className={css.navlink}
               style={({ isActive }) =>
                 isActive
                   ? {
-                      textDecoration: "none",
-                      borderBottom: "3px red solid",
+                      textDecoration: 'none',
+                      borderBottom: '3px red solid',
                     }
-                  : { color: "#545e6f", background: "#f0f0f0" }
+                  : { color: '#545e6f', background: '#f0f0f0' }
               }
             >
               Second Page
+            </NavLink>
+            <NavLink
+              to="/thirdpage"
+              className={css.navlink}
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      borderBottom: '3px red solid',
+                    }
+                  : { color: '#545e6f', background: '#f0f0f0' }
+              }
+            >
+              Third Page
             </NavLink>
           </div>
         </div>
 
         <Routes>
-          <Route path='/firstpage' element={<FirstPage />} />
+          <Route path="/firstpage" element={<FirstPage />} />
 
-          <Route path='/secondpage' element={<SecondPage />} />
+          <Route path="/secondpage" element={<SecondPage />} />
+          <Route path="/thirdpage" element={<ThirdPage />} />
         </Routes>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

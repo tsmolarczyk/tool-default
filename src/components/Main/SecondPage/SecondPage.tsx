@@ -1,47 +1,43 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from 'react'
 
 export const SecondPage = () => {
-  const [users, setUsers] = useState<any>();
-  const [photos, setPhotos] = useState<any>();
+  const [users, setUsers] = useState<any>()
+  const [photos, setPhotos] = useState<any>()
 
   const getUsers = () => {
-    fetch("https://jsonplaceholder.typicode.com/users/")
+    fetch('https://jsonplaceholder.typicode.com/users/')
       .then((response) => response.json())
-      .then((json) => setUsers(json));
-    console.log(users);
-  };
+      .then((json) => setUsers(json))
+    console.log(users)
+  }
 
   const getPhotos = () => {
-    fetch("https://jsonplaceholder.typicode.com/photos")
+    fetch('https://jsonplaceholder.typicode.com/photos')
       .then((response) => response.json())
-      .then((json) => setPhotos(json));
-    console.log(photos);
-  };
+      .then((json) => setPhotos(json))
+    console.log(photos)
+  }
 
-  // useEffect(() => {
-  //   getUsers();
-  // }, []);
-
-  const userToDisplay = useMemo(() => {
+  const userToDisplay = () => {
     if (users) {
-      return users.map((user: any) => <h2>{user.name}</h2>);
+      return users.map((user: any) => <h2>{user.name}</h2>)
     }
-  }, [users]);
+  }
 
-  const photosToDisplay = useMemo(() => {
+  const photosToDisplay = () => {
     if (photos) {
       return photos.map((photos: any) => (
-        <img src={photos.url} alt='photos.id'></img>
-      ));
+        <img src={photos.url} alt="photos.id"></img>
+      ))
     }
-  }, [photos]);
+  }
 
   return (
     <div>
       <button onClick={getUsers}>Download Users</button>
-      {userToDisplay}
+      {userToDisplay()}
       <button onClick={getPhotos}>Get photos links</button>
-      {photosToDisplay}
+      {photosToDisplay()}
     </div>
-  );
-};
+  )
+}
